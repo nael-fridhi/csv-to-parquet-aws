@@ -1,10 +1,17 @@
 package aws
 
 import (
+	"fmt"
 	"os"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 )
 
-func WriteObjectToFile() {
+// WriteObjectToFile Write object to file 
+func WriteObjectToFile(bucketName, objectKey string) {
 
 	sess := session.New(&aws.Config{Region: aws.String("us-east-1")})
 	s3svc := s3.New(sess)
@@ -28,7 +35,7 @@ func WriteObjectToFile() {
 
 	// Create a file to write the S3 Object contents to.
 	path := "/tmp/csvfile.csv"
-	f, err := os.Create("/tmp/csvfile.csv")
+	f, err := os.Create(path)
 	if err != nil {
 		fmt.Println("failed to create file", err)
 		return

@@ -1,10 +1,17 @@
 package aws
 
 import (
+	"fmt"
+	"os"
 
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 )
 
-func WriteObjectToBucket() {
+// WriteObjectToBucket Write object to s3 bucket given the Object Key and Object value
+func WriteObjectToBucket(sess string) {
 
 	// Create an uploader with the session and default options
     uploader := s3manager.NewUploader(sess)
