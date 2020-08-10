@@ -34,7 +34,7 @@ type Titanic struct {
 func ConvertCsvToParquet() {
 	var err error
 
-	fw, err := local.NewLocalFileWriter("tmp/titanic.parquet")
+	fw, err := local.NewLocalFileWriter("/tmp/parquetFile.parquet")
 	if err != nil {
 		log.Println("Can't create the parquet file check that the folder tmp exist", err)
 		return
@@ -49,7 +49,7 @@ func ConvertCsvToParquet() {
 	pw.RowGroupSize = 128 * 1024 * 1024 //128M
 	pw.CompressionType = parquet.CompressionCodec_SNAPPY
 
-	csvFile, _ := os.Open("data/titanic.csv")
+	csvFile, _ := os.Open("/tmp/csvFile.csv")
 	reader := csv.NewReader(bufio.NewReader(csvFile))
 	reader.Comma = ';'
 

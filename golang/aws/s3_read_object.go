@@ -11,9 +11,8 @@ import (
 )
 
 // WriteObjectToFile Write object to file 
-func WriteObjectToFile(bucketName, objectKey string) {
-
-	sess := session.New(&aws.Config{Region: aws.String("us-east-1")})
+func WriteObjectToFile(bucketName, objectKey string, sess session.Session) {
+	
 	s3svc := s3.New(sess)
 	result, err := s3svc.ListBuckets(&s3.ListBucketsInput{})
 	if err != nil {
