@@ -8,13 +8,13 @@ import (
 	"github.com/nael-fridhi/csv-to-parquet-aws/golang/awsfuncs"
 	"github.com/nael-fridhi/csv-to-parquet-aws/golang/csvparquet"
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 )
 
-func main() {
 
-	var ctx context.Context
-	var s3Event events.S3Event
-    bucketName, csvObjectKey := lambda.Start(awsfuncs.GetObjectMetadata(ctx, s3Event))
+func handler(ctx context.Context, s3Event events.S3Event) {
+	
+	bucketName, csvObjectKey := awsfuncs.GetObjectMetadata(ctx, s3Event)
 	
 	fmt.Println(bucketName)
 	fmt.Println("ooooooooooooooooooooooooooooooooooooooo")
@@ -30,4 +30,7 @@ func main() {
 	awsfuncs.WriteObjectToFile(bucketName, csvObjectKey)
 	csvparquet.ConvertCsvToParquet()
 	awsfuncs.WriteObjectToBucket(bucketName, parquetObjectKey)
+}
+func main() {
+	lambda.Start(handler)
 }
