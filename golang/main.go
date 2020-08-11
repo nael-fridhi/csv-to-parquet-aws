@@ -14,7 +14,6 @@ import (
 
 func main() {
 
-	sess := session.New(&aws.Config{Region: aws.String("us-east-1")})
     var ctx context.Context
     var s3Event events.S3Event
 	bucketName, csvObjectKey := awsfuncs.GetObjectMetadata(ctx, s3Event)
@@ -27,7 +26,7 @@ func main() {
 	parquetObjectKey := suf.ReplaceAllString(aux, ".parquet")
 
 
-	awsfuncs.writeObjectToFile(bucketName, objectKey, sess)
+	awsfuncs.writeObjectToFile(bucketName, objectKey)
 	csvparquet.ConvertCsvToParquet()
-	awsfuncs.writeObjectToBucket(bucketName, parquetObjectKey, sess)
+	awsfuncs.writeObjectToBucket(bucketName, parquetObjectKey)
 }

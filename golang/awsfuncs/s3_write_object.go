@@ -23,7 +23,7 @@ func WriteObjectToBucket(bucketName, parquetObjectKey string) {
 
 	
 	// Upload the file to S3.
-    _, err := uploader.Upload(&s3manager.UploadInput{
+    _, err = uploader.Upload(&s3manager.UploadInput{
         Bucket: aws.String(bucketName),
         Key:    aws.String(parquetObjectKey),
         Body:   f,
