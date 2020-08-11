@@ -1,4 +1,4 @@
-module github.com/nael-fridhi/csv-to-parquet-aws
+module github.com/nael-fridhi/csv-to-parquet-aws/golang
 
 go 1.14
 
