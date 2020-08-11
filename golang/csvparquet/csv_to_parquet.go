@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"fmt"
 
 	"github.com/xitongsys/parquet-go-source/local"
 	"github.com/xitongsys/parquet-go/parquet"
@@ -33,14 +34,16 @@ type Titanic struct {
 // ConvertCsvToParquet used to convert the csv file to parquet file and write it in fs
 func ConvertCsvToParquet() {
 	var err error
-
+	fmt.Println("oooooooooooooooooooooooooooooooooooooooooooooo")
 	fw, err := local.NewLocalFileWriter("/tmp/parquetFile.parquet")
+	fmt.Println("oooooooooooooooooooooooooooooooooooooooooooooo")
 	if err != nil {
 		log.Println("Can't create the parquet file check that the folder tmp exist", err)
 		return
 	}
-
+	fmt.Println("oooooooooooooooooooooooooooooooooooooooooooooo")
 	pw, err := writer.NewParquetWriter(fw, new(Titanic), 14)
+	fmt.Println("oooooooooooooooooooooooooooooooooooooooooooooo")
 	if err != nil {
 		log.Println("Can't create parquet writer", err)
 		return
@@ -50,6 +53,9 @@ func ConvertCsvToParquet() {
 	pw.CompressionType = parquet.CompressionCodec_SNAPPY
 
 	csvFile, _ := os.Open("/tmp/csvFile.csv")
+	fmt.Println("oooooooooooooooooooooooooooooooooooooooooooooo")
+	fmt.Println(csvFile)
+	fmt.Println("oooooooooooooooooooooooooooooooooooooooooooooo")
 	reader := csv.NewReader(bufio.NewReader(csvFile))
 	reader.Comma = ';'
 
