@@ -1,10 +1,11 @@
 # AWS S3 & Lambda CSV to Parquet using Golang and Spark Scala
 
-This repository contains sample of converting  a file which is putted into AWS S3 bucket from Csv to Parquet.
+This repository contains sample of converting a CSV file which is uploaded into AWS S3 bucket to Parquet format.
 
 The upload of a CSV file into S3 bucket will trigger a lambda function to convert this object into parquet and then write the result to another prefix in the bucket as shown in the image below.
 
 ![Csv To Parquet AWS Architecture](./data/csv_to_parquet_aws_simple_architecture.jpg)
+
 
 We have implemented this feature using two different programming language.
 
@@ -18,13 +19,13 @@ For the golang you have to:
 2. Package the binary:
     `zip function.zip binaryFile`
 
-3. Also you'll need to set the executable bit in the zipfile. There are a bunch of ways to do this, if you want to do it on windows, you'll need to run a [python script](./golang/script.py) which i find it in the stackoverflow.
+3. Also sometinmes you'll need to set the executable bit in the zipfile. There are a bunch of ways to do this, if you want to do it on windows, you'll need to run a [python script](https://stackoverflow.com/questions/57964626/permissions-denied-when-trying-to-invoke-go-aws-lambda-function) which i find it in the stackoverflow.
 
 ## Spark Scala
 
 For spark scala:
 
-1. package a JAR file using sbt including the spark dependencies
+1. package a JAR file using sbt or maven including the spark dependencies
 
 2. Pass this Jar file to the lambda function
 
