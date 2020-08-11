@@ -1,4 +1,4 @@
-package parquet
+package csvparquet
 
 import (
 	"bufio"
