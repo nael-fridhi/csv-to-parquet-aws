@@ -52,7 +52,7 @@ func ConvertCsvToParquet() {
 	pw.RowGroupSize = 128 * 1024 * 1024 //128M
 	pw.CompressionType = parquet.CompressionCodec_SNAPPY
 
-	csvFile, _ := os.Open("/tmp/csvFile.csv")
+	csvFile, _ := os.Open("/tmp/csvfile.csv")
 	fmt.Println("oooooooooooooooooooooooooooooooooooooooooooooo")
 	fmt.Println(csvFile)
 	fmt.Println("oooooooooooooooooooooooooooooooooooooooooooooo")
