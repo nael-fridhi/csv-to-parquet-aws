@@ -9,16 +9,17 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-func main() {
+func main(ctx context.Context, s3Event events.S3Event) {
 
-    var ctx context.Context
-    var s3Event events.S3Event
-	bucketName, csvObjectKey := awsfuncs.GetObjectMetadata(ctx, s3Event)
-
+    bucketName, csvObjectKey := awsfuncs.GetObjectMetadata(ctx, s3Event)
+	
+	fmt.Println(bucketName)
+	fmt.Println("ooooooooooooooooooooooooooooooooooooooo")
+	fmt.Println(csvObjectKey)
 	// Establish the parquet objectKey 
-	csvPath := "csv/titanic.csv"
+	//csvPath := "csv/titanic.csv"
 	pref := regexp.MustCompile(`(^csv)`)
-	aux := pref.ReplaceAllString(csvPath, "parquet")
+	aux := pref.ReplaceAllString(csvObjectKey, "parquet")
 	suf := regexp.MustCompile(`(\.csv$)`)
 	parquetObjectKey := suf.ReplaceAllString(aux, ".parquet")
 
