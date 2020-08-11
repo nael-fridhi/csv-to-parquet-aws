@@ -7,9 +7,6 @@ import (
 	"github.com/nael-fridhi/csv-to-parquet-aws/golang/awsfuncs"
 	"github.com/nael-fridhi/csv-to-parquet-aws/golang/csvparquet"
 	"github.com/aws/aws-lambda-go/events"
-    "github.com/aws/aws-sdk-go/aws"
-    "github.com/aws/aws-sdk-go/aws/session"
-    "github.com/xitongsys/parquet-go/parquet"
 )
 
 func main() {
@@ -26,7 +23,7 @@ func main() {
 	parquetObjectKey := suf.ReplaceAllString(aux, ".parquet")
 
 
-	awsfuncs.writeObjectToFile(bucketName, objectKey)
+	awsfuncs.WriteObjectToFile(bucketName, csvObjectKey)
 	csvparquet.ConvertCsvToParquet()
-	awsfuncs.writeObjectToBucket(bucketName, parquetObjectKey)
+	awsfuncs.WriteObjectToBucket(bucketName, parquetObjectKey)
 }
