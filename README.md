@@ -14,7 +14,7 @@ We have implemented this feature using two different programming language.
 For the golang you have to:
 
 1. build the binary for your module
-    `GOOS=linux go build golang/csvToParquet.go`
+    `GOARCH=amd64 GOOS=linux go build -gcflags='-N -l' -o . .`
 
 2. Package the binary:
     `zip function.zip binaryFile`
