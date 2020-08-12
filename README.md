@@ -46,6 +46,9 @@ For spark scala:
 - We can improve this project with others feature:
   - Adding a pipeline to deploy version of lambda automatically after commit using travisCI or gitlabCI
   - What if a lambda function fails? there is a default 3 times retry configured in AWS and We can put file not processed in others prefix to be processed later
-  - We can even change the way we process and using AWS Glue instead: an ETL use EMR cluster (Hadoop) under the hood to process data.
+  - We can even change the way we process the data and using AWS Glue instead which is an ETL that uses EMR cluster (Hadoop) under the hood to process data.
+  
+  ![Csv To Parquet AWS Architecture Using EMR](./data/aws_glue_EMR.jpg)
+
   - We can orchestrate the piepline using AWS CodePipeline
   - What if we have too much csv files uploaded in the same time ?
