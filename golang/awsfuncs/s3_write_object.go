@@ -11,7 +11,7 @@ import (
 
 // WriteObjectToBucket Write object to s3 bucket given the Object Key and Object value
 func WriteObjectToBucket(bucketName, parquetObjectKey string) {
-	sess := session.New(&aws.Config{Region: aws.String("us-east-1")})
+	sess := session.New(&aws.Config{Region: aws.String("eu-west-1")})
 
 	// Create an uploader with the session and default options
     uploader := s3manager.NewUploader(sess)

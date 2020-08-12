@@ -12,8 +12,8 @@ import (
 
 // WriteObjectToFile Write object to file 
 func WriteObjectToFile(bucketName, objectKey string) {
-	
-	sess := session.New(&aws.Config{Region: aws.String("us-east-1")})
+	// The region is hard coded here :/ but we can pass it as env variable to lambda 
+	sess := session.New(&aws.Config{Region: aws.String("eu-west-1")})
 	s3svc := s3.New(sess)
 	result, err := s3svc.ListBuckets(&s3.ListBucketsInput{})
 	if err != nil {
