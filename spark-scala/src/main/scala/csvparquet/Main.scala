@@ -13,7 +13,7 @@ class Main {
   def getSourceBuckets(event: S3Event): Unit = {
     val objectKey = event.getRecords.asScala.map(record => decodeS3Key(record.getS3.getObject.getKey))
     val bucketName = event.getRecords.asScala.map(record => decodeS3Key(record.getS3.getBucket.getName))
-    csvToParquet(objectKey(0), bucketNam(0))
+    csvToParquet(objectKey(0), bucketName(0))
   }
 
   def csvToParquet(objectKey: String, bucketName: String) {
