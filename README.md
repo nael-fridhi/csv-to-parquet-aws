@@ -25,16 +25,27 @@ For the golang you have to:
 
 For spark scala:
 
-1. package a JAR file using sbt or maven including the spark dependencies
+1. package a JAR/ZIP file using sbt or maven including the dependencies
 
 2. Pass this Jar file to the lambda function
 
-## Optimization
 
-This task is not optimized it's only a POC of a simple architecture in AWS to convert csv to parquet.
+# AWS 
 
-- Some features which could be add:
-  - What if a lambda function fails? there is a default 3 times retry configured in AWS
-  - We can use AWS Glue which is an ETL working using Hadoop Framework to process the data
+1. Create A Role that allow lambda to interact with S3 bucket and Log to CloudWatch
+
+2. Create Lambda function
+
+3. Create Bucket and the two folder (prefix) for csv files and parquet files
+
+4. Create Event from s3 properties window to trigger lambda function on upload 
+
+
+## Optimization (Thinking!!!!)
+
+- We can improve this project with others feature:
+  - Adding a pipeline to deploy version of lambda automatically after commit using travisCI or gitlabCI
+  - What if a lambda function fails? there is a default 3 times retry configured in AWS and We can put file not processed in others prefix to be processed later
+  - We can even change the way we process and using AWS Glue instead: an ETL use EMR cluster (Hadoop) under the hood to process data.
   - We can orchestrate the piepline using AWS CodePipeline
-  - What if we have too much csv files uploaded in the same time?
+  - What if we have too much csv files uploaded in the same time ?

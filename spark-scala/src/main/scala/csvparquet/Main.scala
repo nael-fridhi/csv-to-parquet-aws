@@ -1,7 +1,8 @@
-package com.aidodev.csvparquet
+package csvparquet
 
 import org.apache.spark.sql.{SaveMode, SparkSession}
 import scala.collection.JavaConverters._
+import scala.collection.mutable._
 import java.net.URLDecoder
 import com.amazonaws.services.lambda.runtime.events.S3Event
 
@@ -9,12 +10,10 @@ class Main {
 
   def decodeS3Key(key: String): String = URLDecoder.decode(key.replace("+", " "), "utf-8")
 
-  def getSourceBuckets(event: S3Event): java.util.List[String] = {
-    val objectKey = event.getRecords.asScala.map(record => decodeS3Key(record.getS3.getObject.getKey)).asJava
-    val bucketName = event.getRecords.asScala.map(record => decodeS3Key(record.getS3.getBucket.getName)).asJava
-    csvToParquet(objectKey, bucketName)
-
-    return "Done!"
+  def getSourceBuckets(event: S3Event): Unit = {
+    val objectKey = event.getRecords.asScala.map(record => decodeS3Key(record.getS3.getObject.getKey))
+    val bucketName = event.getRecords.asScala.map(record => decodeS3Key(record.getS3.getBucket.getName))
+    csvToParquet(objectKey(0), bucketNam(0))
   }
 
   def csvToParquet(objectKey: String, bucketName: String) {
