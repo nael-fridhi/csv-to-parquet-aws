@@ -11,12 +11,13 @@ class Main {
 
   def getSourceBuckets(event: S3Event): java.util.List[String] = {
     val objectKey = event.getRecords.asScala.map(record => decodeS3Key(record.getS3.getObject.getKey)).asJava
+    val bucketName = event.getRecords.asScala.map(record => decodeS3Key(record.getS3.getBucket.getName)).asJava
+    csvToParquet(objectKey, bucketName)
 
-    println(result)
-    return result
+    return "Done!"
   }
 
-  def CsvToParquet(objectKey: String, bucketName: String) {
+  def csvToParquet(objectKey: String, bucketName: String) {
     val spark: SparkSession = SparkSession.builder()
         .master("local[*]")
         .appName("Main")
@@ -24,7 +25,7 @@ class Main {
 
     spark.sparkContext.setLogLevel("ERROR")
     val csvObjectPath: String = "s3a://"+ bucketName + "/csv/" + objectKey
-    var parquetObjectPath = "s3a://"+ bucketName + "/parquet/" + 
+    var parquetObjectPath = csvObjectPath.replace("csv", "parquet")
     val df = spark.read.options(Map("inferschema"->"true","delimiter"->";","header"->"true"))
         .csv(csvObjectPath)
     df.write.mode(SaveMode.Overwrite).parquet(parquetObjectPath)
