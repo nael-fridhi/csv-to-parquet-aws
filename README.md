@@ -44,11 +44,26 @@ For spark scala:
 ## Optimization (Thinking!!!!)
 
 - We can improve this project with others feature:
-  - Adding a pipeline to deploy version of lambda automatically after commit using travisCI or gitlabCI
+  - Adding a pipeline to deploy version of lambda automatically after commit using travisCI,gitlabCI or CodeBuild ..
   - What if a lambda function fails? there is a default 3 times retry configured in AWS and We can put file not processed in others prefix to be processed later
-  - We can even change the way we process the data and using AWS Glue instead which is an ETL that uses EMR cluster (Hadoop) under the hood to process data.
+  - We can even change the way we process the data and using AWS Glue instead which is the serverless ETL service of AWS or we can also use EMR cluster (Hadoop) under the hood to process data.
   
   ![Csv To Parquet AWS Architecture Using EMR](./data/aws_glue_EMR.jpg)
 
-  - We can orchestrate the piepline using AWS CodePipeline
-  - What if we have too much csv files uploaded in the same time ?
+### ETL CHOICE 
+
+When it comes to the csv file processing we have to think about the volume of the data. In fact, Lambda function 
+can't be run more than 15 min so in the case where we process 1 TB of data it's not the best solutions. 
+To fix this issue we can use two solutions the first one using AWS Glue and the second one use AWS EMR:
+
+
+| Criteria                 | Amazon Glue          | Amazon EMR                 |
+| -------------------------| -------------------- |:--------------------:      |
+| Deployment Types         | Serverless           | Server Platform ( Cluster )|
+| Pricing                  | High                 | Low                        |
+| Flexibility & Scalability| Flexible             | Harder to scale            |
+| ETL operations           | Better               | Not so good                |  
+| Performance              | Slower & less stable | Faster and more stable     |
+
+- We can orchestrate the piepline using AWS CodePipeline
+- What if we have too much csv files uploaded in the same time ?
