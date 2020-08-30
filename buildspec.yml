@@ -37,6 +37,13 @@ phases:
       - cd ../terraform
       - terraform init 
       - terraform plan 
+      - |
+        if [ $DESTROY ]
+        then
+          echo "destroyyy"
+        else
+          echo "applyyy"
+        fi
 
   post_build:
     commands:
