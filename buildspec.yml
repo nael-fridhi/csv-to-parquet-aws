@@ -33,10 +33,8 @@ phases:
       - cd golang
       - GOARCH=amd64 GOOS=linux go build -gcflags='-N -l' -o . .
       - zip csv_parquet.zip golang
-      - awscli cp csv_parquet.zip s3://
-      - cd "$CODEBUILD_SRC_DIR"
-      - cd "environments/$TF_ENV/"
-      - echo " building $TF_ENV"
+      - aws s3 cp csv_parquet.zip s3://csv-to-parquet-function-config-bucket
+      - cd ../terraform"
       - terraform init 
       - terraform plan 
 
