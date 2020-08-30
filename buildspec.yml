@@ -40,9 +40,9 @@ phases:
       - |
         if [ $DESTROY ]
         then
-          echo "destroyyy"
+          terraform destroy -auto-approve
         else
-          echo "applyyy"
+          terraform apply -auto-approve
         fi
 
   post_build:

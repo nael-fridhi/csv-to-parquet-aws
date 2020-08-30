@@ -67,3 +67,22 @@ To fix this issue we can use two solutions the first one using AWS Glue and the 
 
 - We can orchestrate the piepline using AWS CodePipeline
 - What if we have too much csv files uploaded in the same time ?
+
+
+## DevOps 
+
+- Using terraform as an infrastructure as a code tool we provisioned the creation and configuration of the bucket and the lambda function. 
+
+- Using the AWS CodeBuild for the Continous Integration and especially for build the zip file of our lambda function and 
+
+
+
+# Resources: 
+
+https://www.rittmanmead.com/blog/page/13/
+
+https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-copydata-s3.html
+
+https://www.terraform.io/docs/index.html
+
+https://github.com/xitongsys/parquet-go
