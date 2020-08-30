@@ -1,0 +1,6 @@
+aws_region = "eu-west-1"
+lambda_function_name = "CsvToParquetFunc"
+bucket_domain_name = "publicis-sapient-recrutement-datalake-exo-"
+lambda_zip_file = "csvToParquet-go-nf.zip"
+lambda_zip_bucket = "csv-to-parquet-function-config-bucket"
+handler = "golang"
