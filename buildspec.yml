@@ -30,6 +30,7 @@ phases:
 
   build:
     commands:
+      - echo $PWD
       - cd golang
       - GOARCH=amd64 GOOS=linux go build -gcflags='-N -l' -o . .
       - zip csv_parquet.zip golang
