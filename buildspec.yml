@@ -33,7 +33,7 @@ phases:
       - cd golang
       - GOARCH=amd64 GOOS=linux go build -gcflags='-N -l' -o . .
       - zip csv_parquet.zip golang
-      - aws s3 cp csv_parquet.zip s3://csv-to-parquet-function-config-bucket
+      - aws s3 cp csv_parquet.zip s3://csv-to-parquet-config-bucket/lambdaZipFiles
       - cd ../terraform
       - terraform init 
       - terraform plan 

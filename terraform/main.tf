@@ -1,3 +1,15 @@
+# Terraform State: s3 bucket backend
+
+terraform {
+  backend "s3" {
+    bucket = "csv-to-parquet-config-bucket"
+    key    = "terraform/CsvParquetInfrastructureState"
+    region = "eu-west-1"
+  }
+}
+
+# AWS provider
+
 provider "aws" {
     region = var.aws_region
 }
