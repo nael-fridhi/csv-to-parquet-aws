@@ -17,9 +17,8 @@ phases:
       - wget --no-cookies --no-check-certificate https://golang.org/dl/go$GO_VERSION.$OS-$ARCH.tar.gz
       - tar -C /usr/local -xzf go$GO_VERSION.$OS-$ARCH.tar.gz
       - export PATH=$PATH:/usr/local/go/bin
-      - "cd /usr/bin"
       - "curl -s -qL -o terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip"
-      - "unzip -o terraform.zip"
+      - "unzip -o terraform.zip -d /usr/bin"
       - "rm terraform.zip"
   pre_build:
     commands:
