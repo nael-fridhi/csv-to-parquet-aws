@@ -40,21 +40,26 @@ For spark scala:
 
 4. Create Event from s3 properties window to trigger lambda function on upload 
 
+## DevOps
 
-## Optimization (Thinking!!!!)
+- Using terraform as an infrastructure as a code tool to automate the creation and configuration of the bucket and the lambda function. 
 
-- We can improve this project with others feature:
-  - Adding a pipeline to deploy version of lambda automatically after commit using travisCI,gitlabCI or CodeBuild ..
-  - What if a lambda function fails? there is a default 3 times retry configured in AWS and We can put file not processed in others prefix to be processed later
-  - We can even change the way we process the data and using AWS Glue instead which is the serverless ETL service of AWS or we can also use EMR cluster (Hadoop) under the hood to process data.
-  
-  ![Csv To Parquet AWS Architecture Using EMR](./data/aws_glue_EMR.jpg)
+- Using the AWS CodeBuild for the Continous Integration: 
+ 1. Build the zip file containing the code of our lambda function
+ 2. execute the scripts terraform to build the infrastructure
+
+- The state of our infrastructure is saved in the bucket  
+
+## Data in Depth
+
+What if we have a big volume of csv files. In this case, lambda functions can not be the best choice. In fact, Lambda function 
+can't be run more than 15 min so in the case where we process for instance 1 TB of data lambda will timeout. So, we have to think about building an ETL to manage our data pipeline such as using Spark-based ETL processing running on Amazon's Elastic Map Reduce (EMR) Hadoop platform.
 
 ### ETL CHOICE 
 
-When it comes to the csv file processing we have to think about the volume of the data. In fact, Lambda function 
-can't be run more than 15 min so in the case where we process 1 TB of data it's not the best solutions. 
-To fix this issue we can use two solutions the first one using AWS Glue and the second one use AWS EMR:
+This table below shows two different solutions for ETL and the difference between them.
+1. AWS Glue
+2. AWS EMR 
 
 
 | Criteria                 | Amazon Glue          | Amazon EMR                 |
@@ -65,17 +70,21 @@ To fix this issue we can use two solutions the first one using AWS Glue and the 
 | ETL operations           | Better               | Not so good                |  
 | Performance              | Slower & less stable | Faster and more stable     |
 
-- We can orchestrate the piepline using AWS CodePipeline
-- What if we have too much csv files uploaded in the same time ?
 
 
-## DevOps 
 
-- Using terraform as an infrastructure as a code tool we provisioned the creation and configuration of the bucket and the lambda function. 
+![Csv To Parquet AWS Architecture Using EMR](./data/aws_glue_EMR.jpg)
 
-- Using the AWS CodeBuild for the Continous Integration and especially for build the zip file of our lambda function and 
+- We can orchestrate the piepline using AWS Data Pipeline
 
+## Optimization (Thinking!!!!)
 
+- We can improve this project with others feature:
+  - Adding a pipeline to deploy version of lambda automatically after commit using travisCI,gitlabCI or CodeBuild ..
+  - What if a lambda function fails or a spark job fails when talking about running or processing in EMR cluster ..
+
+  - We can even change the way we process the data and using AWS Glue instead which is the serverless ETL service of AWS or we can also use EMR cluster (Hadoop) under the hood to process data.
+  
 
 # Resources: 
 
