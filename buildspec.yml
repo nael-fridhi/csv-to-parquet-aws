@@ -36,9 +36,10 @@ phases:
       - aws s3 cp csv_parquet.zip s3://csv-to-parquet-config-bucket/lambdaZipFiles/csv_parquet.zip
       - cd ../terraform
       - terraform init 
-      - terraform plan 
+      - terraform plan
+      - DESTROY=${DESTROY:-false}
       - |
-        if [ -z $DESTROY ]; then
+        if [ $DESTROY = false ]; then
           terraform apply -auto-approve
         else
           terraform destroy -auto-approve
