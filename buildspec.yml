@@ -37,15 +37,7 @@ phases:
       - cd ../terraform
       - terraform init 
       - terraform plan
-      - DESTROY=${DESTROY:-false}
-      - echo $DESTROY
-      - |-
-        if [ "$DESTROY" = "false" ]; then
-          terraform apply -auto-approve
-        else
-          terraform destroy -auto-approve
-        fi
-
+      - terraform apply -auto-approve
   post_build:
     commands:
       - echo "terraform completed on `date`"
