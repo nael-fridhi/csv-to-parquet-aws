@@ -39,8 +39,8 @@ phases:
       - terraform plan
       - DESTROY=${DESTROY:-false}
       - echo $DESTROY
-      - |
-        if [[ $DESTROY = false ]]; then
+      - |-
+        if [ "$DESTROY" = "false" ]; then
           terraform apply -auto-approve
         else
           terraform destroy -auto-approve
