@@ -38,8 +38,7 @@ phases:
       - terraform init 
       - terraform plan 
       - |
-        if [ $DESTROY ]
-        then
+        if [ -z $DESTROY ]; then
           terraform destroy -auto-approve
         else
           terraform apply -auto-approve
